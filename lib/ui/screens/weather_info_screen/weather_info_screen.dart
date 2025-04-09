@@ -8,7 +8,6 @@ import '../../../core/view_models/screens/interfaces/iweather_info_view_model.da
 import '../../../global/router.dart';
 import '../../../utils/string_utrils.dart';
 import '../../common/loading_widget.dart';
-import '../error_screen/error_screen.dart';
 
 class WeatherInfoScreen extends StatefulWidget {
   const WeatherInfoScreen({super.key});
@@ -25,6 +24,7 @@ class _WeatherInfoScreenState extends State<WeatherInfoScreen> {
     _viewModel = context.read<IWeatherInfoViewModel>();
     _viewModel.addListener(_viewModelListener);
     _viewModel.fetchWeatherInfo();
+    _viewModel.fetchFutureWeather();
     super.initState();
   }
 
@@ -48,12 +48,12 @@ class _WeatherInfoScreenState extends State<WeatherInfoScreen> {
           if (viewModel.isLoading) {
             return const LoadingWidget();
           } else {
-            // Thành công mới show WeatherInfoBody
             return WeatherInfoBody(
               cityName: viewModel.weatherInfo?.cityName ?? '',
               temperature: StringUtils.kelvinToCelsiusString(
                 viewModel.weatherInfo?.temperature ?? 0,
               ),
+              futureWeatherList: viewModel.futureWeather,
             );
           }
         },

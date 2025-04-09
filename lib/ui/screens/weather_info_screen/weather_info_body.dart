@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:huynh_duy_khang_home_assignment/core/ui_model/future_weather_ui_model.dart';
 import 'package:huynh_duy_khang_home_assignment/ui/screens/weather_info_screen/widgets/temperature_list_widget.dart';
 
 import '../../../utils/color_utils.dart';
@@ -6,10 +7,12 @@ import '../../../utils/color_utils.dart';
 class WeatherInfoBody extends StatelessWidget {
   final String cityName;
   final String temperature;
+  final FutureWeatherUiModel? futureWeatherList;
   const WeatherInfoBody({
     super.key,
     required this.cityName,
     required this.temperature,
+    required this.futureWeatherList,
   });
 
   @override
@@ -60,8 +63,10 @@ class WeatherInfoBody extends StatelessWidget {
               ],
             ),
           ),
-          // Shadow Line
-          const TemperatureListWidget(),
+          if (futureWeatherList != null)
+          TemperatureListWidget(
+            futureWeatherList: futureWeatherList!,
+          ),
         ],
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:huynh_duy_khang_home_assignment/core/ui_model/future_weather_ui_model.dart';
 
 import '../../../ui_model/current_weather_ui_model.dart';
 
@@ -9,5 +10,8 @@ abstract class IWeatherInfoViewModel extends ChangeNotifier {
 
   CurrentWeatherUiModel? get weatherInfo;
 
+  FutureWeatherUiModel? get futureWeather;
+
   Future<void> fetchWeatherInfo();
+  Future<void> fetchFutureWeather();
 }
