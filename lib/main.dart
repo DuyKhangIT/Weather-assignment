@@ -13,7 +13,6 @@ import 'global/router.dart';
 
 void main() {
   mainDelegate();
-  runApp(const MyApp());
 }
 
 late SharedPreferences sharedPreferences;
@@ -21,7 +20,9 @@ late SharedPreferences sharedPreferences;
 Future<void> mainDelegate() async {
   WidgetsFlutterBinding.ensureInitialized();
   sharedPreferences = await SharedPreferences.getInstance();
+
   await setupLocator();
+
   runApp(const MyApp());
 }
 
@@ -32,7 +33,19 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(

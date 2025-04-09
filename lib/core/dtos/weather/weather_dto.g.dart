@@ -8,14 +8,14 @@ part of 'weather_dto.dart';
 
 WeatherResponseDto _$WeatherResponseDtoFromJson(Map<String, dynamic> json) =>
     WeatherResponseDto(
-      id: json['id'] as String,
+      id: (json['id'] as num).toInt(),
       name: json['name'] as String,
-      temperature: (json['temperature'] as num).toDouble(),
+      main: TemperatureDto.fromJson(json['main'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$WeatherResponseDtoToJson(WeatherResponseDto instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'temperature': instance.temperature,
+      'main': instance.main.toJson(),
     };

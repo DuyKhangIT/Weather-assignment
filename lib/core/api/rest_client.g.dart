@@ -22,17 +22,16 @@ class _RestClient implements RestClient {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<WeatherResponseDto> getSaleLocations({
-    required String deviceSerial,
+  Future<WeatherResponseDto> getCurrentWeather({
     required double lat,
-    required double lng,
-    required double apiKey,
+    required double lon,
+    required String appid,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'lat': lat,
-      r'lon': lng,
-      r'API key': apiKey,
+      r'lon': lon,
+      r'appid': appid,
     };
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;

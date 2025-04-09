@@ -9,7 +9,7 @@ class ResultUIModel {
 }
 
 class DataResultUIModel<T> extends ResultUIModel {
-  T? data;
+  T data;
 
   DataResultUIModel(ResultUIModel result, this.data) {
     isSuccess = result.isSuccess;

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:huynh_duy_khang_home_assignment/ui/screens/error_screen/error_screen.dart';
-import 'package:huynh_duy_khang_home_assignment/ui/screens/loading_screen/loading_screen.dart';
 import 'package:huynh_duy_khang_home_assignment/ui/screens/weather_info_screen/weather_info_screen.dart';
 
 class MyRouter {
-  static const String loading = '/loading';
   static const String error = '/error';
   static const String weatherInfo = '/weatherInfo';
 
@@ -22,11 +20,6 @@ class MyRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     debugPrint('INFO - go to ${settings.name} Screen');
     switch (settings.name) {
-      case loading:
-        return _buildRouteNavigationWithoutEffect(
-          settings,
-          const LoadingScreen(),
-        );
       case error:
         return _buildRouteNavigationWithoutEffect(
           settings,

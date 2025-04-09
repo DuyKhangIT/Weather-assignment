@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+
 import 'package:huynh_duy_khang_home_assignment/utils/color_utils.dart';
 
 import '../../../global/router.dart';
-import '../../../utils/loading_utils.dart';
 
 class ErrorScreen extends StatefulWidget {
   const ErrorScreen({super.key});
@@ -14,6 +13,11 @@ class ErrorScreen extends StatefulWidget {
 }
 
 class _ErrorScreenState extends State<ErrorScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,10 +42,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
           ),
           InkWell(
             onTap: () {
-              LoadingUtils.showLoading();
-              Future.delayed(const Duration(seconds: 1), () {
-                LoadingUtils.hideLoading();
-              });
+              Get.toNamed(MyRouter.weatherInfo);
             },
             child: Container(
               width: 100,

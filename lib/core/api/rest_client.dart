@@ -10,11 +10,10 @@ part 'rest_client.g.dart';
 abstract class RestClient {
   factory RestClient(Dio dio, {String baseUrl}) = _RestClient;
 
-  @GET('data/2.5/weather') // test
-  Future<WeatherResponseDto> getSaleLocations({
-    @Path('serial') required String deviceSerial,
+  @GET('data/2.5/weather')
+  Future<WeatherResponseDto> getCurrentWeather({
     @Query('lat') required double lat,
-    @Query('lon') required double lng,
-    @Query('API key') required double apiKey,
+    @Query('lon') required double lon,
+    @Query('appid') required String appid,
   });
 }
