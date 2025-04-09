@@ -44,8 +44,9 @@ class _MyAppState extends State<MyApp> {
             navigatorKey: GlobalKey<NavigatorState>(),
             onGenerateRoute: (settings) => MyRouter.generateRoute(settings),
             navigatorObservers: [MyRouteObserver()],
-            initialRoute: MyRouter.splash,
+            initialRoute: MyRouter.weatherInfo,
             theme: ThemeData(
+              fontFamily: 'Roboto',
               primarySwatch: Colors.red,
               scaffoldBackgroundColor: ColorUtils.background,
               appBarTheme: const AppBarTheme(

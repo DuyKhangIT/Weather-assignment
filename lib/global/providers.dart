@@ -3,19 +3,19 @@ import 'package:huynh_duy_khang_home_assignment/core/view_models/screens/interfa
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
-import '../core/view_models/screens/implements/home_view_model.dart';
-import '../core/view_models/screens/implements/splash_screen_view_model.dart';
-import '../core/view_models/screens/interfaces/ihome_view_model.dart';
-import '../core/view_models/screens/interfaces/isplash_screen_view_model.dart';
+import '../core/view_models/screens/implements/weather_info_view_model.dart';
+import '../core/view_models/screens/implements/loading_screen_view_model.dart';
+import '../core/view_models/screens/interfaces/iweather_info_view_model.dart';
+import '../core/view_models/screens/interfaces/iloading_screen_view_model.dart';
 
 List<SingleChildWidget> viewModelProviders = [
-  ChangeNotifierProvider<ISplashScreenViewModel>(
-    create: (_) => SplashScreenViewModel(),
+  ChangeNotifierProvider<ILoadingScreenViewModel>(
+    create: (_) => LoadingScreenViewModel(),
   ),
   ChangeNotifierProvider<IConnectivityViewModel>(
     create: (_) => ConnectivityViewModel(),
   ),
-  ChangeNotifierProvider<IHomeViewModel>(
-    create: (_) => HomeViewModel(),
+  ChangeNotifierProvider<IWeatherInfoViewModel>(
+    create: (_) => WeatherInfoViewModel(),
   ),
 ];

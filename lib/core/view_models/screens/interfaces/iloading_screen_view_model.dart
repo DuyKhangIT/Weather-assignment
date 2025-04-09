@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
 
-abstract class ISplashScreenViewModel implements ChangeNotifier {
+abstract class ILoadingScreenViewModel implements ChangeNotifier {
   Future<void> initData();
 }

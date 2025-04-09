@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-
-import '../ui/screens/home_screen/home_screen.dart';
-import '../ui/screens/splash_screen/splash_screen.dart';
+import 'package:huynh_duy_khang_home_assignment/ui/screens/error_screen/error_screen.dart';
+import 'package:huynh_duy_khang_home_assignment/ui/screens/loading_screen/loading_screen.dart';
+import 'package:huynh_duy_khang_home_assignment/ui/screens/weather_info_screen/weather_info_screen.dart';
 
 class MyRouter {
-  static const String splash = '/splash';
-  static const String home = '/home';
+  static const String loading = '/loading';
+  static const String error = '/error';
+  static const String weatherInfo = '/weatherInfo';
 
   static PageRouteBuilder _buildRouteNavigationWithoutEffect(
     RouteSettings settings,
@@ -21,15 +22,20 @@ class MyRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     debugPrint('INFO - go to ${settings.name} Screen');
     switch (settings.name) {
-      case splash:
+      case loading:
         return _buildRouteNavigationWithoutEffect(
           settings,
-          const SplashScreen(),
+          const LoadingScreen(),
         );
-      case home:
+      case error:
         return _buildRouteNavigationWithoutEffect(
           settings,
-          const HomeScreen(),
+          const ErrorScreen(),
+        );
+      case weatherInfo:
+        return _buildRouteNavigationWithoutEffect(
+          settings,
+          const WeatherInfoScreen(),
         );
       default:
         return _buildRouteNavigationWithoutEffect(
