@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 
 import '../../../core/view_models/screens/interfaces/iweather_info_view_model.dart';
 import '../../../global/router.dart';
-import '../../../utils/string_utrils.dart';
 import '../../common/loading_widget.dart';
 
 class WeatherInfoScreen extends StatefulWidget {
@@ -50,9 +49,9 @@ class _WeatherInfoScreenState extends State<WeatherInfoScreen> {
           } else {
             return WeatherInfoBody(
               cityName: viewModel.weatherInfo?.cityName ?? '',
-              temperature: StringUtils.kelvinToCelsiusString(
-                viewModel.weatherInfo?.temperature ?? 0,
-              ),
+              temperature: viewModel.weatherInfo?.temperature != null
+                  ? viewModel.weatherInfo!.temperature.toString()
+                  : '',
               futureWeatherList: viewModel.futureWeather,
             );
           }

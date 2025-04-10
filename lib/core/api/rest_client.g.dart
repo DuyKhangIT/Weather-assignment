@@ -26,12 +26,14 @@ class _RestClient implements RestClient {
     required double lat,
     required double lon,
     required String appid,
+    required String units,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'lat': lat,
       r'lon': lon,
       r'appid': appid,
+      r'units': units,
     };
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
@@ -63,16 +65,18 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<FutureWeatherListDto> getWeatherFor4Days({
+  Future<FutureWeatherListDto> getWeatherFor5Days3HourForecast({
     required double lat,
     required double lon,
     required String appid,
+    required String units,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'lat': lat,
       r'lon': lon,
       r'appid': appid,
+      r'units': units,
     };
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
@@ -83,7 +87,7 @@ class _RestClient implements RestClient {
     )
         .compose(
           _dio.options,
-          'data/2.5/forecast/hourly',
+          'data/2.5/forecast',
           queryParameters: queryParameters,
           data: _data,
         )

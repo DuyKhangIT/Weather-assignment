@@ -35,7 +35,7 @@ class TemperatureWidget extends StatelessWidget {
             ),
           ),
           Text(
-            temperature,
+            '$temperature C',
             style: const TextStyle(
               fontSize: 16,
               color: ColorUtils.blackText,

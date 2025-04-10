@@ -18,6 +18,7 @@ class WeatherService implements IWeatherService {
         lat: 10.7769,
         lon: 106.6959,
         appid: 'faed9bb294de7c6140786effcf73977b',
+        units: 'metric',
       );
     });
 
@@ -29,10 +30,11 @@ class WeatherService implements IWeatherService {
     ResultUIModel result;
     FutureWeatherListDto? data;
     result = await ApiUtils.handleApiCall(() async {
-      data = await getRestClient().getWeatherFor4Days(
+      data = await getRestClient().getWeatherFor5Days3HourForecast(
         lat: 10.7769,
         lon: 106.6959,
         appid: 'faed9bb294de7c6140786effcf73977b',
+        units: 'metric',
       );
     });
 

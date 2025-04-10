@@ -16,12 +16,14 @@ abstract class RestClient {
     @Query('lat') required double lat,
     @Query('lon') required double lon,
     @Query('appid') required String appid,
+    @Query('units') required String units,
   });
 
-  @GET('data/2.5/forecast/hourly')
-  Future<FutureWeatherListDto> getWeatherFor4Days({
+  @GET('data/2.5/forecast')
+  Future<FutureWeatherListDto> getWeatherFor5Days3HourForecast({
     @Query('lat') required double lat,
     @Query('lon') required double lon,
     @Query('appid') required String appid,
+    @Query('units') required String units,
   });
 }

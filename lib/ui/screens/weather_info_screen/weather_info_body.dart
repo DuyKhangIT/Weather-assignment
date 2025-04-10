@@ -7,7 +7,7 @@ import '../../../utils/color_utils.dart';
 class WeatherInfoBody extends StatelessWidget {
   final String cityName;
   final String temperature;
-  final FutureWeatherUiModel? futureWeatherList;
+  final List<FutureWeatherUiModel>? futureWeatherList;
   const WeatherInfoBody({
     super.key,
     required this.cityName,

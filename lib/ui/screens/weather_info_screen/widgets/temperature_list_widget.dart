@@ -5,7 +5,7 @@ import '../../../../core/ui_model/future_weather_ui_model.dart';
 import '../../../../utils/string_utrils.dart';
 
 class TemperatureListWidget extends StatelessWidget {
-  final FutureWeatherUiModel futureWeatherList;
+  final List<FutureWeatherUiModel> futureWeatherList;
   const TemperatureListWidget({
     super.key,
     required this.futureWeatherList,
@@ -17,18 +17,16 @@ class TemperatureListWidget extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: ListView.builder(
-          itemCount: futureWeatherList.futureWeatherList.length,
+          itemCount: futureWeatherList.length,
           shrinkWrap: true,
           padding: EdgeInsets.zero,
           itemBuilder: (context, index) {
-            final weather = futureWeatherList.futureWeatherList[index];
+            final weather = futureWeatherList[index];
             return TemperatureWidget(
               dayOfWeek: StringUtils.getWeekdayFromDateTimeString(
                 weather.dayOfWeek,
               ),
-              temperature: StringUtils.kelvinToCelsiusString(
-                weather.temperature,
-              ),
+              temperature: weather.temperature.toInt().toString(),
             );
           },
         ),

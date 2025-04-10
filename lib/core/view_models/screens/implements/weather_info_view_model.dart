@@ -25,9 +25,9 @@ class WeatherInfoViewModel extends ChangeNotifier
   @override
   CurrentWeatherUiModel? get weatherInfo => _currentWeatherInfo;
 
-  FutureWeatherUiModel? _futureWeatherUiModel;
+  List<FutureWeatherUiModel>? _futureWeatherUiModel;
   @override
-  FutureWeatherUiModel? get futureWeather => _futureWeatherUiModel;
+  List<FutureWeatherUiModel>? get futureWeather => _futureWeatherUiModel;
 
   @override
   Future<void> fetchWeatherInfo() async {
@@ -56,14 +56,13 @@ class WeatherInfoViewModel extends ChangeNotifier
       _hasError = false;
       final result = await _weatherService.getFutureWeather();
       if (result.isSuccess && result.data != null) {
-        _futureWeatherUiModel = FutureWeatherUiModel(
-          futureWeatherList: result.data!.list
-              .map((e) => FutureWeatherObjectUiModel(
-                    dayOfWeek: e.dt_txt,
-                    temperature: e.main.temp,
-                  ))
-              .toList(),
-        );
+        _futureWeatherUiModel = result.data!.list
+            .map((e) => FutureWeatherUiModel(
+                  dayOfWeek: e.dt_txt,
+                  temperature: e.main.temp,
+                ))
+            .toList();
+        _futureWeatherUiModel = pickOneItemPerDay(_futureWeatherUiModel!);
       }
     } catch (e) {
       _hasError = true;
@@ -71,5 +70,37 @@ class WeatherInfoViewModel extends ChangeNotifier
       _isLoading = false;
       notifyListeners();
     }
+  }
+
+  List<FutureWeatherUiModel> pickOneItemPerDay(
+      List<FutureWeatherUiModel> list) {
+    final now = DateTime.now();
+    final startDate = DateTime(now.year, now.month, now.day);
+
+    final Map<int, FutureWeatherUiModel> selected = {};
+
+    for (final item in list) {
+      final itemDate = DateTime(
+        item.dayOfWeek.year,
+        item.dayOfWeek.month,
+        item.dayOfWeek.day,
+      );
+      final diffDays = itemDate.difference(startDate).inDays;
+
+      if (diffDays >= 0 && diffDays < 4) {
+        selected.putIfAbsent(diffDays, () {
+          return FutureWeatherUiModel(
+            dayOfWeek: item.dayOfWeek,
+            temperature:
+                item.temperature.roundToDouble(),
+          );
+        });
+      }
+      if (selected.length == 4) {
+        break;
+      }
+    }
+
+    return selected.values.toList();
   }
 }

@@ -19,18 +19,10 @@ void setupRestClient({
   String? bearerAuthToken,
 }) {
   var dio = Dio();
-  var dioWithReceiveTimeOut = Dio();
   dio.options = BaseOptions(
       connectTimeout: const Duration(milliseconds: 300000),
       receiveTimeout:
           const Duration(milliseconds: 0), // [0] meanings no timeout limit
-      headers: {
-        'Accept-Encoding': 'gzip, deflate, br',
-        'Connection': 'keep-alive'
-      });
-  dioWithReceiveTimeOut.options = BaseOptions(
-      connectTimeout: const Duration(milliseconds: 15000),
-      receiveTimeout: const Duration(milliseconds: 15000),
       headers: {
         'Accept-Encoding': 'gzip, deflate, br',
         'Connection': 'keep-alive'
