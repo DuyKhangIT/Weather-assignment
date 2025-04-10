@@ -24,8 +24,8 @@ This architecture ensures:
 
 ## Libraries and Frameworks
 The project uses the following libraries and frameworks:
-- **Flutter**: For building the cross-platform UI.
-- **Dart**: The programming language for Flutter.
+- **Flutter**: For building the cross-platform UI (version 3.22.2 - channel stable • https://github.com/flutter/flutter.git).
+- **Dart**: The programming language for Flutter (version 3.4.3).
 - **json_serializable**: For generating JSON serialization/deserialization code.
 - **Provider**: For state management, allowing the ViewModel to notify the View of changes.
 - **Material Design**: For consistent UI components and theming.
