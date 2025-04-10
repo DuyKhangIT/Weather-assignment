@@ -4,6 +4,12 @@ import '../../dtos/future_weather_list/future_weather_list_dto.dart';
 import '../../ui_model/result_ui_model.dart';
 
 abstract class IWeatherService {
-  Future<DataResultUIModel<WeatherResponseDto?>> getCurrentWeather();
-  Future<DataResultUIModel<FutureWeatherListDto?>> getFutureWeather();
+  Future<DataResultUIModel<WeatherResponseDto?>> getCurrentWeather(
+    double lat,
+    double lng,
+  );
+  Future<DataResultUIModel<FutureWeatherListDto?>> getFutureWeather(
+    double lat,
+    double lng,
+  );
 }

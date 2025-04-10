@@ -4,6 +4,7 @@ import 'package:huynh_duy_khang_home_assignment/core/ui_model/current_weather_ui
 import 'package:huynh_duy_khang_home_assignment/core/ui_model/future_weather_ui_model.dart';
 
 import '../../../../global/locator.dart';
+import '../../../../utils/device_utils.dart';
 import '../interfaces/iweather_info_view_model.dart';
 
 class WeatherInfoViewModel extends ChangeNotifier
@@ -29,17 +30,21 @@ class WeatherInfoViewModel extends ChangeNotifier
   @override
   List<FutureWeatherUiModel>? get futureWeather => _futureWeatherUiModel;
 
+  double lat = 0;
+  double lng = 0;
+
   @override
-  Future<void> fetchWeatherInfo() async {
+  Future<void> init() async {
     try {
       _isLoading = true;
       _hasError = false;
-      final result = await _weatherService.getCurrentWeather();
-      if (result.isSuccess && result.data != null) {
-        _currentWeatherInfo = CurrentWeatherUiModel(
-          cityName: result.data!.name,
-          temperature: result.data!.main.temp,
-        );
+      bool getCurrentLocationSuccess = await getCurrentLocation();
+      if (getCurrentLocationSuccess) {
+        await fetchWeatherInfo();
+        await fetchFutureWeather();
+      } else {
+        _hasError = true;
+        return;
       }
     } catch (e) {
       _hasError = true;
@@ -50,11 +55,33 @@ class WeatherInfoViewModel extends ChangeNotifier
   }
 
   @override
+  Future<void> fetchWeatherInfo() async {
+    try {
+      final result = await _weatherService.getCurrentWeather(
+        lat,
+        lng,
+      );
+      if (result.isSuccess && result.data != null) {
+        _currentWeatherInfo = CurrentWeatherUiModel(
+          cityName: result.data!.name,
+          temperature: result.data!.main.temp,
+        );
+      }
+    } catch (e) {
+      _hasError = true;
+      debugPrint(e.toString());
+    } finally {
+      notifyListeners();
+    }
+  }
+
+  @override
   Future<void> fetchFutureWeather() async {
     try {
-      _isLoading = true;
-      _hasError = false;
-      final result = await _weatherService.getFutureWeather();
+      final result = await _weatherService.getFutureWeather(
+        lat,
+        lng,
+      );
       if (result.isSuccess && result.data != null) {
         _futureWeatherUiModel = result.data!.list
             .map((e) => FutureWeatherUiModel(
@@ -66,9 +93,23 @@ class WeatherInfoViewModel extends ChangeNotifier
       }
     } catch (e) {
       _hasError = true;
+      debugPrint(e.toString());
     } finally {
-      _isLoading = false;
       notifyListeners();
+    }
+  }
+
+  Future<bool> getCurrentLocation() async {
+    final currentPosition = await DeviceUtils.determinePosition()
+        .timeout(const Duration(seconds: 30), onTimeout: () {
+      return;
+    });
+    if (currentPosition == null) {
+      return false;
+    } else {
+      lat = currentPosition.latitude;
+      lng = currentPosition.longitude;
+      return true;
     }
   }
 
@@ -91,8 +132,7 @@ class WeatherInfoViewModel extends ChangeNotifier
         selected.putIfAbsent(diffDays, () {
           return FutureWeatherUiModel(
             dayOfWeek: item.dayOfWeek,
-            temperature:
-                item.temperature.roundToDouble(),
+            temperature: item.temperature.roundToDouble(),
           );
         });
       }

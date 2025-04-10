@@ -12,6 +12,7 @@ abstract class IWeatherInfoViewModel extends ChangeNotifier {
 
   List<FutureWeatherUiModel>? get futureWeather;
 
+  Future<void> init();
   Future<void> fetchWeatherInfo();
   Future<void> fetchFutureWeather();
 }

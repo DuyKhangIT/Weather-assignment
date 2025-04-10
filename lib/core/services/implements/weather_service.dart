@@ -10,13 +10,17 @@ import '../interfaces/iweather_service.dart';
 
 class WeatherService implements IWeatherService {
   @override
-  Future<DataResultUIModel<WeatherResponseDto?>> getCurrentWeather() async {
+  Future<DataResultUIModel<WeatherResponseDto?>> getCurrentWeather(
+    double lat,
+    double lng,
+  ) async {
     ResultUIModel result;
     WeatherResponseDto? data;
+
     result = await ApiUtils.handleApiCall(() async {
       data = await getRestClient().getCurrentWeather(
-        lat: 10.7769,
-        lon: 106.6959,
+        lat: lat,
+        lon: lng,
         appid: 'faed9bb294de7c6140786effcf73977b',
         units: 'metric',
       );
@@ -26,13 +30,16 @@ class WeatherService implements IWeatherService {
   }
 
   @override
-  Future<DataResultUIModel<FutureWeatherListDto?>> getFutureWeather() async {
+  Future<DataResultUIModel<FutureWeatherListDto?>> getFutureWeather(
+    double lat,
+    double lng,
+  ) async {
     ResultUIModel result;
     FutureWeatherListDto? data;
     result = await ApiUtils.handleApiCall(() async {
       data = await getRestClient().getWeatherFor5Days3HourForecast(
-        lat: 10.7769,
-        lon: 106.6959,
+        lat: lat,
+        lon: lng,
         appid: 'faed9bb294de7c6140786effcf73977b',
         units: 'metric',
       );

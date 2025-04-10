@@ -22,8 +22,7 @@ class _WeatherInfoScreenState extends State<WeatherInfoScreen> {
   void initState() {
     _viewModel = context.read<IWeatherInfoViewModel>();
     _viewModel.addListener(_viewModelListener);
-    _viewModel.fetchWeatherInfo();
-    _viewModel.fetchFutureWeather();
+    _viewModel.init();
     super.initState();
   }
 
