@@ -50,7 +50,10 @@ class _WeatherInfoScreenState extends State<WeatherInfoScreen> {
             return WeatherInfoBody(
               cityName: viewModel.weatherInfo?.cityName ?? '',
               temperature: viewModel.weatherInfo?.temperature != null
-                  ? viewModel.weatherInfo!.temperature.toString()
+                  ? viewModel.weatherInfo!.temperature
+                      .roundToDouble()
+                      .toInt()
+                      .toString()
                   : '',
               futureWeatherList: viewModel.futureWeather,
             );

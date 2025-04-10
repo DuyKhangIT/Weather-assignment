@@ -22,12 +22,12 @@ class _LoadingWidgetState extends State<LoadingWidget>
     _controller = AnimationController(
       duration: const Duration(seconds: 2),
       vsync: this,
-    )..repeat(); // <-- Cho nó quay liên tục
+    )..repeat();
   }
 
   @override
   void dispose() {
-    _controller.dispose(); // nhớ dispose controller
+    _controller.dispose();
     super.dispose();
   }
 

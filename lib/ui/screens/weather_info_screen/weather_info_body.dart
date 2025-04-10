@@ -28,14 +28,25 @@ class WeatherInfoBody extends StatelessWidget {
             ),
             child: Column(
               children: [
-                Text(
-                  temperature,
-                  style: const TextStyle(
-                    fontSize: 96,
-                    fontWeight: FontWeight.w700,
-                    color: ColorUtils.blackText,
-                    height: 1.2,
-                  ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      temperature,
+                      style: const TextStyle(
+                        fontSize: 96,
+                        fontWeight: FontWeight.w700,
+                        color: ColorUtils.blackText,
+                        height: 1.2,
+                      ),
+                    ),
+                    const SizedBox(width: 5),
+                    Image.asset(
+                      'assets/icons/ic_celsius.png',
+                      width: 90,
+                      height: 90,
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 10),
                 Text(
@@ -64,9 +75,9 @@ class WeatherInfoBody extends StatelessWidget {
             ),
           ),
           if (futureWeatherList != null)
-          TemperatureListWidget(
-            futureWeatherList: futureWeatherList!,
-          ),
+            TemperatureListWidget(
+              futureWeatherList: futureWeatherList!,
+            ),
         ],
       ),
     );
